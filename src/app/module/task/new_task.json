@@ -1,0 +1,1122 @@
+{
+  "PETS": [
+    {
+      "title": "Feed fish",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Feed and water pets",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Pick up dog poop",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Refill birdfeeder",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wash pet bowls",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Clean and refill litter box",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Wash litter box",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Vacuum pet bedding",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wash pet bed",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wash pet blankets",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wash pet toys",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean dog kennel",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean pet food container",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean fish tank",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Change water in fish tank",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Change fish tank filter",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    }
+  ],
+  "LAUNDRY": [
+    {
+      "title": "Wash and hang clothes",
+      "recurrence": "As needed",
+      "rrule": ""
+    },
+    {
+      "title": "Collate dirty laundry and sort into colors ready for washing",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Fold dry clothes, put away",
+      "recurrence": "As needed",
+      "rrule": ""
+    },
+    {
+      "title": "Iron clothes",
+      "recurrence": "As needed",
+      "rrule": ""
+    },
+    {
+      "title": "Place dirty clothing into the laundry basket",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Wipe down laundry appliances",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean dryer",
+      "recurrence": "After each use",
+      "rrule": ""
+    },
+    {
+      "title": "Clean washing machine",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Dust laundry area",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Organize storage",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Clean and organize laundry area",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wipe down light switches and doorknobs",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Mop floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Organize shelves",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Sweep cobwebs",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Vacuum floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    }
+  ],
+  "KITCHEN": [
+    {
+      "title": "Wash the dishes",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Wipe kitchen countertops and sink",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Wipe stovetop and burners",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Load, switch on and unload dishwasher",
+      "recurrence": "Daily/As needed",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Take out the trash",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Wipe down refrigerator (outside)",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wipe spots and marks off kitchen faucets",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wipe kitchen cabinets",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean microwave oven",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean toaster and empty crumbs",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Dispose of old or expired food",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Mop floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean refrigerator",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean oven",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean freezer",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Deep clean oven",
+      "recurrence": "Every 6 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=6"
+    },
+    {
+      "title": "Deep clean stovetop",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean stove hood",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wash or replace stove hood filters",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wash stovetop grates",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean the trash disposal",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Descale coffee maker",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Organize pantry and discard any expired or unused products",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Replace water filter",
+      "recurrence": "As needed/Monthly",
+      "rrule": ""
+    },
+    {
+      "title": "Refill dishwasher rinse aid/salt",
+      "recurrence": "As needed",
+      "rrule": ""
+    },
+    {
+      "title": "Refill paper towels",
+      "recurrence": "As needed",
+      "rrule": ""
+    },
+    {
+      "title": "Replace kitchen towels",
+      "recurrence": "As needed/Weekly",
+      "rrule": ""
+    },
+    {
+      "title": "Dust kitchen appliances",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean kitchen tiles",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean drawers and cabinets",
+      "recurrence": "Every 6 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=6"
+    },
+    {
+      "title": "Clean top of fridge",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Flush, clean and disinfect drains",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean and polish appliance surfaces",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean coffee maker",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean dishwasher",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean lighting appliance",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    }
+  ],
+  "HOUSE (OUTDOORS)": [
+    {
+      "title": "Pressure wash driveway and pathways",
+      "recurrence": "Every 6 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=6"
+    },
+    {
+      "title": "Pressure wash house and fence",
+      "recurrence": "Every 12 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=12"
+    },
+    {
+      "title": "Pressure wash pool deck",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Clean window sills",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean windows",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean entrance doors",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Sweep porch",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Sweep cobwebs",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    }
+  ],
+  "GARDEN": [
+    {
+      "title": "Water plants",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Cut the grass",
+      "recurrence": "Weekly/As needed",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Sweep porch",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Remove leaves",
+      "recurrence": "Seasonally",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Fertilize plants",
+      "recurrence": "Seasonally",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Clean outdoor furniture",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean barbecue",
+      "recurrence": "After each use",
+      "rrule": ""
+    }
+  ],
+  "GARAGE": [
+    {
+      "title": "Sweep cobwebs",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Organize shelves",
+      "recurrence": "Every 6 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=6"
+    },
+    {
+      "title": "Wash car",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Vacuum car",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    }
+  ],
+  "ENTRANCE": [
+    {
+      "title": "Clean entrance carpet and floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Tidy up wardrobe",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean shoes",
+      "recurrence": "Weekly/As needed",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Mop floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Vacuum floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Dust surfaces and furniture",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wipe down mirrors",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean window sills",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean windows",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wipe down baseboards and door frames",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wipe down light switches and doorknobs",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean doors",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean lighting appliance",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    }
+  ],
+  "ENTIRE HOME": [
+    {
+      "title": "Dust surfaces and furniture",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Vacuum floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Mop floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wipe down light switches and doorknobs",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Take out the trash",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Check and replace air fresheners",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean ceiling fans",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean radiators",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean the air vents",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Clean walls and ceiling",
+      "recurrence": "Every 6 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=6"
+    },
+    {
+      "title": "Clean windows",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wash carpeting and rugs",
+      "recurrence": "Every 6 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=6"
+    },
+    {
+      "title": "Wash curtains",
+      "recurrence": "Every 6 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=6"
+    },
+    {
+      "title": "Water plants",
+      "recurrence": "Weekly/As needed",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wipe down mirrors",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean and dust decorative items",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Polish wooden furniture",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Deep clean carpets and rugs",
+      "recurrence": "Every 12 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=12"
+    },
+    {
+      "title": "Deep clean furniture",
+      "recurrence": "Every 12 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=12"
+    },
+    {
+      "title": "Deep clean upholstery",
+      "recurrence": "Every 12 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=12"
+    },
+    {
+      "title": "Dust and clean electronics (TV, iPad, Computer, etc.)",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Launder throw blankets and cushion covers",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Organize shelves",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Declutter wardrobe",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    }
+  ],
+  "DRESSING ROOM": [
+    {
+      "title": "Declutter wardrobe",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Tidy up wardrobe",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Dust surfaces and furniture",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Vacuum floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wipe down mirrors",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Organize shelves",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean window sills",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean windows",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wipe down baseboards and door frames",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wipe down light switches and doorknobs",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean doors",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean lighting appliance",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    }
+  ],
+  "DINING ROOM": [
+    {
+      "title": "Wipe down table & chairs",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Dust surfaces and furniture",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Vacuum floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Mop floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Organize drawers and cabinets",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean windows",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean lighting appliance",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Clean doors",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean window sills",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    }
+  ],
+  "CHILD'S ROOM": [
+    {
+      "title": "Make the bed",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Put away toys and games",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Place dirty clothing into the laundry basket",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Dust surfaces and furniture",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Vacuum floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Change bed sheets",
+      "recurrence": "Every 2 weeks",
+      "rrule": "FREQ=WEEKLY;INTERVAL=2"
+    },
+    {
+      "title": "Empty trash",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wipe down mirrors",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Vacuum mattress",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wash blankets/quilts",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Launder and air out pillows",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Rotate and flip mattress",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Wipe down light switches and doorknobs",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean windows",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Water plants",
+      "recurrence": "Weekly/As needed",
+      "rrule": "FREQ=WEEKLY"
+    }
+  ],
+  "BEDROOM": [
+    {
+      "title": "Make the bed",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Tidy up wardrobe",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Dust surfaces and furniture",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Vacuum floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Change bed sheets",
+      "recurrence": "Every 2 weeks",
+      "rrule": "FREQ=WEEKLY;INTERVAL=2"
+    },
+    {
+      "title": "Empty trash",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wipe down mirrors",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Vacuum mattress",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wash blankets/quilts",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Launder and air out pillows",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Rotate and flip mattress",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Wipe down light switches and doorknobs",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean window sills",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean ceiling fans",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wash curtains",
+      "recurrence": "Every 6 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=6"
+    },
+    {
+      "title": "Organize drawers and cabinets",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    }
+  ],
+  "LIVING ROOM": [
+    {
+      "title": "Wipe down coffee table",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Dust surfaces and furniture",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Vacuum floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wipe down entertainment appliances",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Dust and clean electronics (TV, iPad, Computer, etc.)",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean and dust decorative items",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Mop floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Organize shelves",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wipe down light switches and doorknobs",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Polish wooden furniture",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Launder throw blankets and cushion covers",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean under couch",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean windows",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean and sweep the fireplace",
+      "recurrence": "Seasonally",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Deep clean upholstery",
+      "recurrence": "Every 6 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=6"
+    }
+  ],
+  "BATHROOM": [
+    {
+      "title": "Clean, scrub and disinfect toilet",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wipe down countertop and sink",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Wipe marks and spots off mirror and faucets",
+      "recurrence": "Daily",
+      "rrule": "FREQ=DAILY"
+    },
+    {
+      "title": "Mop floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean and scrub bathtub",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean and scrub shower",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Wash towels",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Replace towels",
+      "recurrence": "Weekly/As needed",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Refill toilet paper",
+      "recurrence": "As needed",
+      "rrule": ""
+    },
+    {
+      "title": "Refill handwash soap",
+      "recurrence": "As needed",
+      "rrule": ""
+    },
+    {
+      "title": "Clean toothbrush holder",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Wash shower curtain",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Scrub grout",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean showerhead",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean bathroom vanities",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Clean bathroom tiles",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Flush, clean and disinfect drains",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Disinfect doorknobs and handles",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Clean the bathroom cabinets, drawers and shelves",
+      "recurrence": "Every 6 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=6"
+    },
+    {
+      "title": "Organize drawers and cabinets",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    }
+  ],
+  "OFFICE": [
+    {
+      "title": "Dust surfaces and furniture",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Vacuum floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Dust and clean electronics (TV, iPad, Computer, etc.)",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    },
+    {
+      "title": "Organize shelves",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Organize drawers and cabinets",
+      "recurrence": "Every 3 months",
+      "rrule": "FREQ=MONTHLY;INTERVAL=3"
+    },
+    {
+      "title": "Clean windows",
+      "recurrence": "Monthly",
+      "rrule": "FREQ=MONTHLY"
+    },
+    {
+      "title": "Mop floor",
+      "recurrence": "Weekly",
+      "rrule": "FREQ=WEEKLY"
+    }
+  ]
+}

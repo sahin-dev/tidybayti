@@ -1,0 +1,157 @@
+{
+  "bedroom": [
+    { "title": "Change bedsheet", "recurrence": "Every 2 weeks" },
+    { "title": "Vacuum carpet", "recurrence": "Weekly" },
+    { "title": "Dust furniture", "recurrence": "Weekly" },
+    { "title": "Wipe windowsills", "recurrence": "Monthly" },
+    { "title": "Organize closet", "recurrence": "Monthly" },
+    { "title": "Flip mattress", "recurrence": "Every 3 months" },
+    { "title": "Wash pillowcases", "recurrence": "Weekly" },
+    { "title": "Wash blankets", "recurrence": "Monthly" },
+    { "title": "Clean mirrors", "recurrence": "Weekly" },
+    { "title": "Declutter nightstand", "recurrence": "Weekly" },
+    { "title": "Polish wooden furniture", "recurrence": "Monthly" },
+    { "title": "Wipe light switches", "recurrence": "Monthly" },
+    { "title": "Vacuum under the bed", "recurrence": "Monthly" },
+    { "title": "Clean ceiling fan", "recurrence": "Monthly" },
+    { "title": "Wash curtains", "recurrence": "Every 3 months" }
+  ],
+
+  "kitchen": [
+    { "title": "Wipe countertops", "recurrence": "Daily" },
+    { "title": "Clean stovetop", "recurrence": "Daily" },
+    { "title": "Mop floor", "recurrence": "Weekly" },
+    { "title": "Clean refrigerator shelves", "recurrence": "Monthly" },
+    { "title": "Empty trash bin", "recurrence": "Daily" },
+    { "title": "Wipe cabinet doors", "recurrence": "Monthly" },
+    { "title": "Clean oven interior", "recurrence": "Monthly" },
+    { "title": "Wipe microwave inside/out", "recurrence": "Weekly" },
+    { "title": "Descale coffee maker", "recurrence": "Monthly" },
+    { "title": "Scrub sink and faucet", "recurrence": "Weekly" },
+    { "title": "Organize pantry", "recurrence": "Monthly" },
+    { "title": "Check and discard expired food", "recurrence": "Weekly" },
+    { "title": "Wipe backsplash", "recurrence": "Weekly" },
+    { "title": "Dust light fixtures", "recurrence": "Monthly" },
+    { "title": "Clean dishwasher filter", "recurrence": "Monthly" }
+  ],
+
+  "bathroom": [
+    { "title": "Clean and scrub bathtub", "recurrence": "Every week" },
+    { "title": "Clean and scrub shower", "recurrence": "Every week" },
+    { "title": "Clean, scrub and disinfect toilet", "recurrence": "Every week" },
+    { "title": "Organiz drawers and cabinets", "recurrence": "Every week" },
+    { "title": "Clean bathroom tiles", "recurrence": "Every month" },
+    { "title": "Clean bathroom vanities", "recurrence": "Every 2 weeks" },
+    { "title": "Clean lighting appliance", "recurrence": "Every 6 months" },
+    { "title": "Clean showerhead", "recurrence": "Every month" },
+    { "title": "Clean and scrub sink", "recurrence": "Every 3 days" },
+    { "title": "Clean the air vents", "recurrence": "Every month" },
+    { "title": "Clean the bathroom cabinets, drawers and shelves", "recurrence": "Every 2 months" },
+    { "title": "Clean toothbrush holder", "recurrence": "Every month" },
+    { "title": "Clean washing machine", "recurrence": "Every month" },
+    { "title": "Clean window sills", "recurrence": "Every 3 months" },
+    { "title": "Clean windows", "recurrence": "Every 6 months" },
+
+    { "title": "Disinfect doorknobs and handles", "recurrence": "Every week" },
+    { "title": "Dust surface and furniture", "recurrence": "Every week" },
+    { "title": "Flush, clean and disinfect drains", "recurrence": "Every month" },
+    { "title": "Mop floor", "recurrence": "Every 3 days" },
+    { "title": "Refill handwash soap", "recurrence": "Every 3 weeks" },
+    { "title": "Refill toilet paper", "recurrence": "Every 3 days" },
+
+    { "title": "Replace towels", "recurrence": "Every 4 days" },
+    { "title": "Scrub grout", "recurrence": "Every month" },
+    { "title": "Sweep cobwebs", "recurrence": "Every 2 months" },
+    { "title": "Vacuum floor", "recurrence": "Every 3 days" },
+    { "title": "Wash bath mats", "recurrence": "Every week" },
+    { "title": "Wash bathroom rugs", "recurrence": "Every 2 months" },
+    { "title": "Wash shower curtain", "recurrence": "Every month" },
+    { "title": "Wash towels", "recurrence": "Every week" },
+    { "title": "Wipe down light swithces and doorknobs", "recurrence": "Every month" },
+    { "title": "Wipe marks and spots off mirror and faucets", "recurrence": "Daily" },
+    { "title": "Wipe down mirrors", "recurrence": "Every week" }
+  ],
+
+  "living_room": [
+    { "title": "Dust surfaces", "recurrence": "Weekly" },
+    { "title": "Vacuum floor and carpet", "recurrence": "Weekly" },
+    { "title": "Clean windows", "recurrence": "Monthly" },
+    { "title": "Organize magazines and remotes", "recurrence": "Weekly" },
+    { "title": "Wipe TV screen", "recurrence": "Weekly" },
+    { "title": "Mop floor", "recurrence": "Weekly" },
+    { "title": "Vacuum sofa cushions", "recurrence": "Weekly" },
+    { "title": "Clean coffee table", "recurrence": "Weekly" },
+    { "title": "Polish wooden furniture", "recurrence": "Monthly" },
+    { "title": "Wash throw blankets", "recurrence": "Monthly" },
+    { "title": "Clean ceiling fan", "recurrence": "Monthly" },
+    { "title": "Declutter shelves", "recurrence": "Monthly" },
+    { "title": "Disinfect remote controls", "recurrence": "Weekly" },
+    { "title": "Vacuum behind furniture", "recurrence": "Monthly" },
+    { "title": "Dust decor items", "recurrence": "Weekly" }
+  ],
+
+  "dining_room": [
+    { "title": "Wipe dining table", "recurrence": "Daily" },
+    { "title": "Clean chairs", "recurrence": "Weekly" },
+    { "title": "Polish table surface", "recurrence": "Monthly" },
+    { "title": "Mop floor", "recurrence": "Weekly" },
+    { "title": "Dust light fixtures", "recurrence": "Monthly" },
+    { "title": "Clean placemats", "recurrence": "Weekly" },
+    { "title": "Wipe cabinet glass", "recurrence": "Monthly" },
+    { "title": "Vacuum rugs", "recurrence": "Weekly" },
+    { "title": "Clean wall decor", "recurrence": "Monthly" },
+    { "title": "Organize dining storage", "recurrence": "Monthly" }
+  ],
+
+  "laundry_room": [
+    { "title": "Wipe washing machine", "recurrence": "Weekly" },
+    { "title": "Clean dryer lint trap", "recurrence": "After each use" },
+    { "title": "Mop floor", "recurrence": "Weekly" },
+    { "title": "Wipe detergent shelf", "recurrence": "Weekly" },
+    { "title": "Clean inside washer drum", "recurrence": "Monthly" },
+    { "title": "Organize laundry supplies", "recurrence": "Monthly" },
+    { "title": "Dust surfaces", "recurrence": "Weekly" },
+    { "title": "Check for leaks", "recurrence": "Monthly" },
+    { "title": "Wipe door and knobs", "recurrence": "Weekly" },
+    { "title": "Clean utility sink", "recurrence": "Weekly" }
+  ],
+
+  "garage": [
+    { "title": "Sweep floor", "recurrence": "Weekly" },
+    { "title": "Organize tools", "recurrence": "Monthly" },
+    { "title": "Check car tire pressure", "recurrence": "Monthly" },
+    { "title": "Dispose of hazardous waste", "recurrence": "Every 6 months" },
+    { "title": "Wipe workbench", "recurrence": "Weekly" },
+    { "title": "Inspect garage door", "recurrence": "Monthly" },
+    { "title": "Clean light fixtures", "recurrence": "Monthly" },
+    { "title": "Declutter shelves", "recurrence": "Quarterly" },
+    { "title": "Lubricate door hinges", "recurrence": "Every 6 months" },
+    { "title": "Vacuum car interior", "recurrence": "Weekly" }
+  ],
+
+  "office": [
+    { "title": "Dust desk and shelves", "recurrence": "Weekly" },
+    { "title": "Clean computer monitor", "recurrence": "Weekly" },
+    { "title": "Vacuum floor", "recurrence": "Weekly" },
+    { "title": "Organize cables", "recurrence": "Monthly" },
+    { "title": "Wipe keyboard and mouse", "recurrence": "Weekly" },
+    { "title": "Clean windows", "recurrence": "Monthly" },
+    { "title": "Disinfect phone", "recurrence": "Weekly" },
+    { "title": "Empty trash bin", "recurrence": "Daily" },
+    { "title": "Sort papers", "recurrence": "Weekly" },
+    { "title": "Clean chair upholstery", "recurrence": "Monthly" }
+  ],
+
+  "outdoor": [
+    { "title": "Sweep porch", "recurrence": "Weekly" },
+    { "title": "Water plants", "recurrence": "Daily" },
+    { "title": "Trim hedges", "recurrence": "Monthly" },
+    { "title": "Mow lawn", "recurrence": "Weekly" },
+    { "title": "Clean outdoor furniture", "recurrence": "Monthly" },
+    { "title": "Check sprinklers", "recurrence": "Monthly" },
+    { "title": "Clean grill", "recurrence": "After each use" },
+    { "title": "Rake leaves", "recurrence": "Seasonally" },
+    { "title": "Wash patio floor", "recurrence": "Monthly" },
+    { "title": "Inspect garden tools", "recurrence": "Monthly" }
+  ]
+}

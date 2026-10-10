@@ -1,0 +1,15 @@
+{
+  "employeeId": "67850206A119500C078D0F75",
+  "name": "pogad95260",
+  "email": "denob64968@nalwan.com",
+  "phoneNumber": "1234567890",
+  "address": "123 Main St, Springfield",
+  "designation": "Software Engineer",
+  "jobType": "Full-time",
+  "CPR": "123456789012",
+  "passport": "P123456789",
+  "drivingLicense": "D987654321",
+  "dutyTime": "9:00 AM - 5:00 PM",
+  "workingDay": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+  "offDay": "Saturday"
+}

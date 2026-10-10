@@ -1,0 +1,4887 @@
+{
+  "info": {
+    "name": "Tidy Bity Backend API",
+    "description": "Postman documentation for the Tidy Bity backend. Routes were generated from src/app/module/** route, controller, service, and model files. Set baseUrl and apiPrefix in the environment before running requests.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.request.headers.upsert({ key: 'Accept', value: 'application/json' });"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8002"
+    },
+    {
+      "key": "apiPrefix",
+      "value": ""
+    },
+    {
+      "key": "authToken",
+      "value": ""
+    },
+    {
+      "key": "adminToken",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "description": "Account registration, activation, login, password reset, and password change. Most endpoints are public; change password requires a bearer token.",
+      "auth": {
+        "type": "noauth"
+      },
+      "item": [
+        {
+          "name": "Register Account",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/auth/register",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "auth",
+                "register"
+              ],
+              "query": []
+            },
+            "description": "Creates a USER or EMPLOYEE auth account and sends an activation code. Roles accepted by the current model are USER and EMPLOYEE.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"USER\",\n  \"firstName\": \"Tidy\",\n  \"lastName\": \"Bity\",\n  \"email\": \"user@example.com\",\n  \"password\": \"Password123!\",\n  \"confirmPassword\": \"Password123!\",\n  \"phoneNumber\": \"+97330000000\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Resend Activation Code",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/auth/activation-code-resend",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "auth",
+                "activation-code-resend"
+              ],
+              "query": []
+            },
+            "description": "Sends a fresh account activation code to the user email.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Activate Account",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/auth/activate-account",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "auth",
+                "activate-account"
+              ],
+              "query": []
+            },
+            "description": "Activates an account with the emailed activation code and returns access and refresh tokens.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"activationCode\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "",
+                  "const response = pm.response.json();",
+                  "const data = response.data || response;",
+                  "if (data.accessToken) pm.environment.set(\"authToken\", data.accessToken);",
+                  "if (data.token) pm.environment.set(\"authToken\", data.token);",
+                  "if (data.refreshToken) pm.environment.set(\"refreshToken\", data.refreshToken);",
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/auth/login",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ],
+              "query": []
+            },
+            "description": "Authenticates an active user and returns access and refresh tokens. Optional role helps detect wrong-role login attempts.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"Password123!\",\n  \"role\": \"USER\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "",
+                  "const response = pm.response.json();",
+                  "const data = response.data || response;",
+                  "if (data.accessToken) pm.environment.set(\"authToken\", data.accessToken);",
+                  "if (data.token) pm.environment.set(\"authToken\", data.token);",
+                  "if (data.refreshToken) pm.environment.set(\"refreshToken\", data.refreshToken);",
+                  ""
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Social Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/auth/social-login",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "auth",
+                "social-login"
+              ],
+              "query": []
+            },
+            "description": "Verifies a Google or Apple Firebase ID token and returns token, role, isSubscribed, and productId.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"idToken\": \"<firebase-id-token>\",\n  \"provider\": \"google\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const response = pm.response.json();",
+                  "const data = response.data || response;",
+                  "if (data.token) pm.environment.set(\"authToken\", data.token);"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/auth/forgot-password",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "auth",
+                "forgot-password"
+              ],
+              "query": []
+            },
+            "description": "Sends a password reset verification code.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Verify Forgot Password OTP",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/auth/forget-pass-otp-verify",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "auth",
+                "forget-pass-otp-verify"
+              ],
+              "query": []
+            },
+            "description": "Verifies the password reset code before reset.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"code\": \"123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/auth/reset-password",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "auth",
+                "reset-password"
+              ],
+              "query": []
+            },
+            "description": "Sets a new password after OTP verification.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"newPassword\": \"NewPassword123!\",\n  \"confirmPassword\": \"NewPassword123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/auth/change-password",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "auth",
+                "change-password"
+              ],
+              "query": []
+            },
+            "description": "Changes the password for the authenticated USER, EMPLOYEE, ADMIN, or SUPER_ADMIN.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"Password123!\",\n  \"newPassword\": \"NewPassword123!\",\n  \"confirmPassword\": \"NewPassword123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "description": "Authenticated user profile, employee management, and subscription status endpoints.",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{authToken}}",
+            "type": "string"
+          }
+        ]
+      },
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/user/profile",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "user",
+                "profile"
+              ],
+              "query": []
+            },
+            "description": "Returns the authenticated user's profile."
+          },
+          "event": []
+        },
+        {
+          "name": "Edit Profile",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/user/edit-profile",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "user",
+                "edit-profile"
+              ],
+              "query": []
+            },
+            "description": "Updates the authenticated profile. Supports optional profile_image upload.",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "firstName",
+                  "value": "Tidy",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "lastName",
+                  "value": "Bity",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "phoneNumber",
+                  "value": "+97330000000",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "dateOfBirth",
+                  "value": "1995-01-01",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "address",
+                  "value": "Manama, Bahrain",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "profile_image",
+                  "value": "",
+                  "type": "file",
+                  "description": "Profile image file."
+                }
+              ]
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Delete My Account",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/user/delete-account",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "user",
+                "delete-account"
+              ],
+              "query": []
+            },
+            "description": "Deletes the account after verifying email and password.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"Password123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Add Employee",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/user/add-employee",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "user",
+                "add-employee"
+              ],
+              "query": []
+            },
+            "description": "Creates an employee under the authenticated USER account. Requires multipart form data with profile_image.",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "firstName",
+                  "value": "Employee",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "lastName",
+                  "value": "One",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "email",
+                  "value": "employee@example.com",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "password",
+                  "value": "Password123!",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "phoneNumber",
+                  "value": "+97331111111",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "jobType",
+                  "value": "Cleaner",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "CPRNumber",
+                  "value": "123456789",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "CPRExpDate",
+                  "value": "12/31/2028",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "passportNumber",
+                  "value": "A1234567",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "passportExpDate",
+                  "value": "12/31/2030",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "note",
+                  "value": "Morning shift",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "dutyTime",
+                  "value": "8 hours",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "breakTimeStart",
+                  "value": "01:00 PM",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "breakTimeEnd",
+                  "value": "02:00 PM",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "workingDay",
+                  "value": "Monday,Tuesday,Wednesday,Thursday,Friday",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "offDay",
+                  "value": "Saturday",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "designation",
+                  "value": "Housekeeper",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "address",
+                  "value": "Manama, Bahrain",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "profile_image",
+                  "value": "",
+                  "type": "file",
+                  "description": "Employee profile image."
+                }
+              ]
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Edit Employee",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/user/edit-employee",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "user",
+                "edit-employee"
+              ],
+              "query": []
+            },
+            "description": "Updates employee profile fields. Email and password cannot be changed here.",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "userId",
+                  "value": "{{employeeUserId}}",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "authId",
+                  "value": "{{employeeAuthId}}",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "firstName",
+                  "value": "Employee",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "lastName",
+                  "value": "Updated",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "workingDay",
+                  "value": "Monday,Tuesday,Wednesday",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "profile_image",
+                  "value": "",
+                  "type": "file",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Delete Employee",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/user/delete-employee",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "user",
+                "delete-employee"
+              ],
+              "query": []
+            },
+            "description": "Deletes an employee owned by the authenticated USER.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"{{employeeUserId}}\",\n  \"authId\": \"{{employeeAuthId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get My Employees",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/user/get-my-employee?page=1&limit=10&sort=-createdAt&fields=&searchTerm=",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "user",
+                "get-my-employee"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pagination page."
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Pagination size."
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt",
+                  "description": "Comma-separated sort fields."
+                },
+                {
+                  "key": "fields",
+                  "value": "",
+                  "description": "Comma-separated response fields."
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "",
+                  "description": "Search term for supported list endpoints."
+                }
+              ]
+            },
+            "description": "Lists employees for the authenticated USER. Supports QueryBuilder pagination, sort, fields, filters, and searchTerm."
+          },
+          "event": []
+        },
+        {
+          "name": "Get Single Employee",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/user/get-single-employee?userId=%7B%7BemployeeUserId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "user",
+                "get-single-employee"
+              ],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "{{employeeUserId}}"
+                }
+              ]
+            },
+            "description": "Returns one employee by userId."
+          },
+          "event": []
+        },
+        {
+          "name": "Get User Subscription Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/user/subscription_status",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "user",
+                "subscription_status"
+              ],
+              "query": []
+            },
+            "description": "Returns basic subscription and trial status for the authenticated USER."
+          },
+          "event": []
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "description": "Admin profile endpoints. Use adminToken for these requests.",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{adminToken}}",
+            "type": "string"
+          }
+        ]
+      },
+      "item": [
+        {
+          "name": "Get Admin Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/admin/profile",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "admin",
+                "profile"
+              ],
+              "query": []
+            },
+            "description": "Returns the authenticated admin profile."
+          },
+          "event": []
+        },
+        {
+          "name": "Edit Admin Profile",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/admin/edit-profile",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "admin",
+                "edit-profile"
+              ],
+              "query": []
+            },
+            "description": "Updates admin profile details. Supports optional profile_image upload.",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "firstName",
+                  "value": "Admin",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "lastName",
+                  "value": "User",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "profile_image",
+                  "value": "",
+                  "type": "file",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Delete Admin Account",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/admin/delete-account",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "admin",
+                "delete-account"
+              ],
+              "query": []
+            },
+            "description": "Deletes an admin account after email/password verification.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"Password123!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        }
+      ]
+    },
+    {
+      "name": "Rooms And Houses",
+      "description": "House and room metadata endpoints for authenticated USER accounts.",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{authToken}}",
+            "type": "string"
+          }
+        ]
+      },
+      "item": [
+        {
+          "name": "Create House",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/room/post-house",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "room",
+                "post-house"
+              ],
+              "query": []
+            },
+            "description": "Creates a house for the authenticated USER.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"My House\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get Single House",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/room/get-single-house?houseId=%7B%7BhouseId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "room",
+                "get-single-house"
+              ],
+              "query": [
+                {
+                  "key": "houseId",
+                  "value": "{{houseId}}"
+                }
+              ]
+            },
+            "description": "Fetches a house by houseId."
+          },
+          "event": []
+        },
+        {
+          "name": "Get My Houses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/room/get-my-houses",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "room",
+                "get-my-houses"
+              ],
+              "query": []
+            },
+            "description": "Lists houses for the authenticated USER."
+          },
+          "event": []
+        },
+        {
+          "name": "Create Room",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/room/post-room",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "room",
+                "post-room"
+              ],
+              "query": []
+            },
+            "description": "Creates a room. If houseId does not match a house, houseName is required and a house is created.",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "houseId",
+                  "value": "{{houseId}}",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "houseName",
+                  "value": "My House",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "roomName",
+                  "value": "Kitchen",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "roomImage",
+                  "value": "",
+                  "type": "file",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get My Rooms",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/room/get-my-room?houseId=%7B%7BhouseId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "room",
+                "get-my-room"
+              ],
+              "query": [
+                {
+                  "key": "houseId",
+                  "value": "{{houseId}}"
+                }
+              ]
+            },
+            "description": "Lists rooms for the authenticated USER. Optional houseId filters by house."
+          },
+          "event": []
+        },
+        {
+          "name": "Get Single Room",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/room/get-single-room?roomId=%7B%7BroomId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "room",
+                "get-single-room"
+              ],
+              "query": [
+                {
+                  "key": "roomId",
+                  "value": "{{roomId}}"
+                }
+              ]
+            },
+            "description": "Fetches a room by roomId."
+          },
+          "event": []
+        },
+        {
+          "name": "Edit Single Room",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/room/edit-single-room",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "room",
+                "edit-single-room"
+              ],
+              "query": []
+            },
+            "description": "Updates room data. Supports optional roomImage upload.",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "roomId",
+                  "value": "{{roomId}}",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "roomName",
+                  "value": "Updated Kitchen",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "roomImage",
+                  "value": "",
+                  "type": "file",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Delete Single Room",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/room/delete-single-room",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "room",
+                "delete-single-room"
+              ],
+              "query": []
+            },
+            "description": "Deletes a room by roomId.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roomId\": \"{{roomId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "description": "Task assignment, status updates, grocery workflow, notifications, and presets.",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{authToken}}",
+            "type": "string"
+          }
+        ]
+      },
+      "item": [
+        {
+          "name": "Create Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/post-task",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "post-task"
+              ],
+              "query": []
+            },
+            "description": "Creates one task per roomId for an employee. Recurrence values vary in the conflicted code; ONE_TIME and RECURRENT are documented from the latest branch.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignedTo\": \"{{employeeUserId}}\",\n  \"roomIds\": [\n    \"{{roomId}}\"\n  ],\n  \"taskName\": \"Clean kitchen\",\n  \"recurrence\": \"ONE_TIME\",\n  \"startDateStr\": \"10/08/2026\",\n  \"startTimeStr\": \"09:00 AM\",\n  \"endDateStr\": \"10/08/2026\",\n  \"endTimeStr\": \"10:00 AM\",\n  \"taskDetails\": \"Wipe counters and mop floor\",\n  \"additionalMessage\": \"Use eco cleaner\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get Task",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/get-task?taskId=%7B%7BtaskId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "get-task"
+              ],
+              "query": [
+                {
+                  "key": "taskId",
+                  "value": "{{taskId}}"
+                }
+              ]
+            },
+            "description": "Fetches a task by taskId."
+          },
+          "event": []
+        },
+        {
+          "name": "Get My Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/get-my-task?page=1&limit=10&sort=-createdAt&fields=&searchTerm=&status=PENDING&recurrence=ONE_TIME",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "get-my-task"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pagination page."
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Pagination size."
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt",
+                  "description": "Comma-separated sort fields."
+                },
+                {
+                  "key": "fields",
+                  "value": "",
+                  "description": "Comma-separated response fields."
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "",
+                  "description": "Search term for supported list endpoints."
+                },
+                {
+                  "key": "status",
+                  "value": "PENDING"
+                },
+                {
+                  "key": "recurrence",
+                  "value": "ONE_TIME"
+                }
+              ]
+            },
+            "description": "Lists tasks owned by the authenticated USER. Supports filters like status and recurrence plus QueryBuilder params."
+          },
+          "event": []
+        },
+        {
+          "name": "Get Employee Specific Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/get-employee-specific-task?page=1&limit=10&sort=-createdAt&fields=&searchTerm=",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "get-employee-specific-task"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pagination page."
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Pagination size."
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt",
+                  "description": "Comma-separated sort fields."
+                },
+                {
+                  "key": "fields",
+                  "value": "",
+                  "description": "Comma-separated response fields."
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "",
+                  "description": "Search term for supported list endpoints."
+                }
+              ]
+            },
+            "description": "Lists future tasks assigned to the authenticated employee."
+          },
+          "event": []
+        },
+        {
+          "name": "Get Employee Current Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/get-employee-specific-current-task?page=1&limit=10&sort=-createdAt&fields=&searchTerm=",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "get-employee-specific-current-task"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pagination page."
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Pagination size."
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt",
+                  "description": "Comma-separated sort fields."
+                },
+                {
+                  "key": "fields",
+                  "value": "",
+                  "description": "Comma-separated response fields."
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "",
+                  "description": "Search term for supported list endpoints."
+                }
+              ]
+            },
+            "description": "Lists today's tasks assigned to the authenticated employee. This endpoint appears in one side of an unresolved merge conflict."
+          },
+          "event": []
+        },
+        {
+          "name": "Get All Tasks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/get-all-task?page=1&limit=10&sort=-createdAt&fields=&searchTerm=",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "get-all-task"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pagination page."
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Pagination size."
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt",
+                  "description": "Comma-separated sort fields."
+                },
+                {
+                  "key": "fields",
+                  "value": "",
+                  "description": "Comma-separated response fields."
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "",
+                  "description": "Search term for supported list endpoints."
+                }
+              ]
+            },
+            "description": "Lists all tasks. Route auth differs across conflict branches; usually USER or employee-level auth."
+          },
+          "event": []
+        },
+        {
+          "name": "Update Task",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/update-task",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "update-task"
+              ],
+              "query": []
+            },
+            "description": "Updates mutable task fields. Schedule fields are rejected by the service.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taskId\": \"{{taskId}}\",\n  \"taskName\": \"Clean kitchen deeply\",\n  \"taskDetails\": \"Include cabinet handles\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Update Task Or Grocery Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/update-task-or-grocery-status",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "update-task-or-grocery-status"
+              ],
+              "query": []
+            },
+            "description": "Updates status on either a task or a grocery item. Provide taskId or groceryId, not both.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taskId\": \"{{taskId}}\",\n  \"status\": \"COMPLETED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Update Task Or Grocery Note",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/update-grocery-or-task-with-note",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "update-grocery-or-task-with-note"
+              ],
+              "query": []
+            },
+            "description": "Adds or updates a note on either a task or grocery item. Provide taskId or groceryId.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taskId\": \"{{taskId}}\",\n  \"note\": \"Completed before noon\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Delete Task",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/delete-task",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "delete-task"
+              ],
+              "query": []
+            },
+            "description": "Deletes a task by taskId.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taskId\": \"{{taskId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Create Grocery Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/post-grocery-category",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "post-grocery-category"
+              ],
+              "query": []
+            },
+            "description": "Creates grocery categories. Service expects an array payload spread into insert/create.",
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"name\": \"Vegetables\"\n  },\n  {\n    \"name\": \"Dairy\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get Grocery Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/get-grocery-category?page=1&limit=10&sort=-createdAt&fields=&searchTerm=",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "get-grocery-category"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pagination page."
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Pagination size."
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt",
+                  "description": "Comma-separated sort fields."
+                },
+                {
+                  "key": "fields",
+                  "value": "",
+                  "description": "Comma-separated response fields."
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "",
+                  "description": "Search term for supported list endpoints."
+                }
+              ]
+            },
+            "description": "Lists grocery categories with QueryBuilder params."
+          },
+          "event": []
+        },
+        {
+          "name": "Create Grocery",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/post-grocery",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "post-grocery"
+              ],
+              "query": []
+            },
+            "description": "Creates a grocery assignment for an employee. Conflicted code shows groceryList in the latest branch and groceryName in another branch.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"assignedTo\": \"{{employeeUserId}}\",\n  \"groceryList\": [\n    \"Milk\",\n    \"Eggs\",\n    \"Rice\"\n  ],\n  \"startDateStr\": \"10/08/2026\",\n  \"startTimeStr\": \"11:00 AM\",\n  \"endDateStr\": \"10/08/2026\",\n  \"endTimeStr\": \"12:00 PM\",\n  \"recurrence\": \"ONE_TIME\",\n  \"additionalMessage\": \"Buy fresh items\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get Grocery",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/get-grocery?groceryId=%7B%7BgroceryId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "get-grocery"
+              ],
+              "query": [
+                {
+                  "key": "groceryId",
+                  "value": "{{groceryId}}"
+                }
+              ]
+            },
+            "description": "Fetches a grocery item by groceryId."
+          },
+          "event": []
+        },
+        {
+          "name": "Get My Grocery",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/get-my-grocery?page=1&limit=10&sort=-createdAt&fields=&searchTerm=",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "get-my-grocery"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pagination page."
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Pagination size."
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt",
+                  "description": "Comma-separated sort fields."
+                },
+                {
+                  "key": "fields",
+                  "value": "",
+                  "description": "Comma-separated response fields."
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "",
+                  "description": "Search term for supported list endpoints."
+                }
+              ]
+            },
+            "description": "Lists grocery items for the authenticated USER or EMPLOYEE."
+          },
+          "event": []
+        },
+        {
+          "name": "Get Notifications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/get-notifications",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "get-notifications"
+              ],
+              "query": []
+            },
+            "description": "Lists notifications for the authenticated user."
+          },
+          "event": []
+        },
+        {
+          "name": "Get Task Presets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/presets",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "presets"
+              ],
+              "query": []
+            },
+            "description": "Returns household task presets from household_tasks.json. This endpoint appears in one side of an unresolved merge conflict."
+          },
+          "event": []
+        },
+        {
+          "name": "Update Grocery",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/update-grocery",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "update-grocery"
+              ],
+              "query": []
+            },
+            "description": "Updates mutable grocery fields. Schedule fields are rejected.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"groceryId\": \"{{groceryId}}\",\n  \"groceryList\": [\n    \"Milk\",\n    \"Bread\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Delete Grocery",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/task/delete-grocery",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "task",
+                "delete-grocery"
+              ],
+              "query": []
+            },
+            "description": "Deletes a grocery item by groceryId.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"groceryId\": \"{{groceryId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        }
+      ]
+    },
+    {
+      "name": "Grocery Search",
+      "description": "Standalone grocery search module.",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{authToken}}",
+            "type": "string"
+          }
+        ]
+      },
+      "item": [
+        {
+          "name": "Search Grocery List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/grocery/search?q=milk",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "grocery",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "milk"
+                }
+              ]
+            },
+            "description": "Searches grocery reference data by q."
+          },
+          "event": []
+        }
+      ]
+    },
+    {
+      "name": "Wallet",
+      "description": "Budgets, expenses, and wallet category data.",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{authToken}}",
+            "type": "string"
+          }
+        ]
+      },
+      "item": [
+        {
+          "name": "Create Budget",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/wallet/post-budget",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "wallet",
+                "post-budget"
+              ],
+              "query": []
+            },
+            "description": "Creates a budget. budgetImage is a string URL/path in the current service.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"Food and Drinks\",\n  \"budgetImage\": \"https://example.com/budget.png\",\n  \"budgetDateStr\": \"10/01/2026\",\n  \"currency\": \"BHD\",\n  \"amount\": 250\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get Budget",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/wallet/get-budget?budgetId=%7B%7BbudgetId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "wallet",
+                "get-budget"
+              ],
+              "query": [
+                {
+                  "key": "budgetId",
+                  "value": "{{budgetId}}"
+                }
+              ]
+            },
+            "description": "Fetches one budget and populated expenses."
+          },
+          "event": []
+        },
+        {
+          "name": "Get My Budgets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/wallet/get-my-budget?page=1&limit=10&sort=-createdAt&fields=&searchTerm=",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "wallet",
+                "get-my-budget"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pagination page."
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Pagination size."
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt",
+                  "description": "Comma-separated sort fields."
+                },
+                {
+                  "key": "fields",
+                  "value": "",
+                  "description": "Comma-separated response fields."
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "",
+                  "description": "Search term for supported list endpoints."
+                }
+              ]
+            },
+            "description": "Lists budgets for the authenticated USER."
+          },
+          "event": []
+        },
+        {
+          "name": "Get All Budgets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/wallet/get-all-budget?page=1&limit=10&sort=-createdAt&fields=&searchTerm=",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "wallet",
+                "get-all-budget"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pagination page."
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Pagination size."
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt",
+                  "description": "Comma-separated sort fields."
+                },
+                {
+                  "key": "fields",
+                  "value": "",
+                  "description": "Comma-separated response fields."
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "",
+                  "description": "Search term for supported list endpoints."
+                }
+              ]
+            },
+            "description": "Lists all budgets. Requires ADMIN or SUPER_ADMIN."
+          },
+          "event": []
+        },
+        {
+          "name": "Update Budget",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/wallet/update-budget",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "wallet",
+                "update-budget"
+              ],
+              "query": []
+            },
+            "description": "Updates budget category, amount, or budgetImage.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"budgetId\": \"{{budgetId}}\",\n  \"amount\": 300\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Delete Budget",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/wallet/delete-budget",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "wallet",
+                "delete-budget"
+              ],
+              "query": []
+            },
+            "description": "Deletes a budget and related expenses.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"budgetId\": \"{{budgetId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Create Expense",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/wallet/post-expense",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "wallet",
+                "post-expense"
+              ],
+              "query": []
+            },
+            "description": "Creates an expense under a budget.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"budgetId\": \"{{budgetId}}\",\n  \"expenseDateStr\": \"10/08/2026\",\n  \"amount\": 25\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get Expense",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/wallet/get-expense?expenseId=%7B%7BexpenseId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "wallet",
+                "get-expense"
+              ],
+              "query": [
+                {
+                  "key": "expenseId",
+                  "value": "{{expenseId}}"
+                }
+              ]
+            },
+            "description": "Fetches one expense by expenseId."
+          },
+          "event": []
+        },
+        {
+          "name": "Get Single Budget Expense",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/wallet/get-single-budget-expense?budgetId=%7B%7BbudgetId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "wallet",
+                "get-single-budget-expense"
+              ],
+              "query": [
+                {
+                  "key": "budgetId",
+                  "value": "{{budgetId}}"
+                }
+              ]
+            },
+            "description": "Route exists, but the service implementation is currently empty."
+          },
+          "event": []
+        },
+        {
+          "name": "Delete Expense",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/wallet/delete-expense",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "wallet",
+                "delete-expense"
+              ],
+              "query": []
+            },
+            "description": "Deletes an expense and decrements the parent budget currentExpense.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expenseId\": \"{{expenseId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get Budget Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/wallet/get-budget-category",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "wallet",
+                "get-budget-category"
+              ],
+              "query": []
+            },
+            "description": "Returns built-in wallet budget categories."
+          },
+          "event": []
+        }
+      ]
+    },
+    {
+      "name": "Recipes",
+      "description": "Recipe CRUD and favorite toggles.",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{authToken}}",
+            "type": "string"
+          }
+        ]
+      },
+      "item": [
+        {
+          "name": "Create Recipe",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/recipe/post-recipe",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "recipe",
+                "post-recipe"
+              ],
+              "query": []
+            },
+            "description": "Creates a recipe. ingredients, steps, and tags may be comma-separated strings or repeated values; the service converts them to arrays.",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "recipeName",
+                  "value": "Chicken Biryani",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "cookingTime",
+                  "value": "45 minutes",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "description",
+                  "value": "Family dinner recipe",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "ingredients",
+                  "value": "chicken,rice,spices",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "steps",
+                  "value": "Marinate,Cook rice,Combine",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "tags",
+                  "value": "dinner,protein",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "url",
+                  "value": "https://example.com/recipe",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "recipeImage",
+                  "value": "",
+                  "type": "file",
+                  "description": ""
+                },
+                {
+                  "key": "recipe",
+                  "value": "",
+                  "type": "file",
+                  "description": "Optional recipe file in one branch."
+                }
+              ]
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get Recipe",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/recipe/get-recipe?recipeId=%7B%7BrecipeId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "recipe",
+                "get-recipe"
+              ],
+              "query": [
+                {
+                  "key": "recipeId",
+                  "value": "{{recipeId}}"
+                }
+              ]
+            },
+            "description": "Fetches one recipe by recipeId."
+          },
+          "event": []
+        },
+        {
+          "name": "Get My Recipes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/recipe/get-my-recipe?page=1&limit=10&sort=-createdAt&fields=&searchTerm=",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "recipe",
+                "get-my-recipe"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pagination page."
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Pagination size."
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt",
+                  "description": "Comma-separated sort fields."
+                },
+                {
+                  "key": "fields",
+                  "value": "",
+                  "description": "Comma-separated response fields."
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "",
+                  "description": "Search term for supported list endpoints."
+                }
+              ]
+            },
+            "description": "Lists recipes created by the authenticated USER, with favorite flags."
+          },
+          "event": []
+        },
+        {
+          "name": "Get All Recipes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/recipe/get-all-recipe?page=1&limit=10&sort=-createdAt&fields=&searchTerm=",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "recipe",
+                "get-all-recipe"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Pagination page."
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Pagination size."
+                },
+                {
+                  "key": "sort",
+                  "value": "-createdAt",
+                  "description": "Comma-separated sort fields."
+                },
+                {
+                  "key": "fields",
+                  "value": "",
+                  "description": "Comma-separated response fields."
+                },
+                {
+                  "key": "searchTerm",
+                  "value": "",
+                  "description": "Search term for supported list endpoints."
+                }
+              ]
+            },
+            "description": "Lists all recipes. Requires ADMIN or SUPER_ADMIN."
+          },
+          "event": []
+        },
+        {
+          "name": "Update Recipe",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/recipe/update-recipe",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "recipe",
+                "update-recipe"
+              ],
+              "query": []
+            },
+            "description": "Updates recipe fields. Supports optional recipeImage upload.",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "recipeId",
+                  "value": "{{recipeId}}",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "recipeName",
+                  "value": "Updated Recipe",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "ingredients",
+                  "value": "rice,spices",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "recipeImage",
+                  "value": "",
+                  "type": "file",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Delete Recipe",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/recipe/delete-recipe",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "recipe",
+                "delete-recipe"
+              ],
+              "query": []
+            },
+            "description": "Deletes a recipe by recipeId.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipeId\": \"{{recipeId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Favorite Or Unfavorite Recipe",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/recipe/favorite-unfavorite-recipe?recipeId=%7B%7BrecipeId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "recipe",
+                "favorite-unfavorite-recipe"
+              ],
+              "query": [
+                {
+                  "key": "recipeId",
+                  "value": "{{recipeId}}"
+                }
+              ]
+            },
+            "description": "Toggles a recipe in the authenticated user's favorites."
+          },
+          "event": []
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "description": "PayPal, Stripe, Google Play, and Apple payment endpoints. Some endpoints are from unresolved conflict branches.",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{authToken}}",
+            "type": "string"
+          }
+        ]
+      },
+      "item": [
+        {
+          "name": "Payment Success Page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/payment/success",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "payment",
+                "success"
+              ],
+              "query": []
+            },
+            "description": "Renders payment success page."
+          },
+          "event": []
+        },
+        {
+          "name": "Payment Cancel Page",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/payment/cancel",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "payment",
+                "cancel"
+              ],
+              "query": []
+            },
+            "description": "Renders payment cancel page."
+          },
+          "event": []
+        },
+        {
+          "name": "Checkout Subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/payment/checkout-subscription",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "payment",
+                "checkout-subscription"
+              ],
+              "query": []
+            },
+            "description": "Initializes PayPal subscription checkout.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"packageType\": \"monthly\",\n  \"amount\": 9.99,\n  \"gateway\": \"paypal\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Generate Stripe Payment Link",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/payment/generate/payment-link",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "payment",
+                "generate",
+                "payment-link"
+              ],
+              "query": []
+            },
+            "description": "Generates a Stripe payment link. Present in one side of an unresolved merge conflict.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price_id\": \"price_123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get User Stripe Subscription",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/payment/user/subscription",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "payment",
+                "user",
+                "subscription"
+              ],
+              "query": []
+            },
+            "description": "Returns Stripe subscription info for the authenticated user. Present in one side of an unresolved merge conflict."
+          },
+          "event": []
+        },
+        {
+          "name": "Verify Google Play Subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/payment/google-play/verify-subscription",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "payment",
+                "google-play",
+                "verify-subscription"
+              ],
+              "query": []
+            },
+            "description": "Verifies a Google Play subscription purchase.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"packageName\": \"com.tidybity.app\",\n  \"subscriptionId\": \"premium_monthly\",\n  \"purchaseToken\": \"purchase-token\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Verify Google Play Product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/payment/google-play/verify-product",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "payment",
+                "google-play",
+                "verify-product"
+              ],
+              "query": []
+            },
+            "description": "Verifies a Google Play one-time product purchase.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"packageName\": \"com.tidybity.app\",\n  \"productId\": \"premium_once\",\n  \"purchaseToken\": \"purchase-token\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Google Play Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/payment/google-play/webhook",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "payment",
+                "google-play",
+                "webhook"
+              ],
+              "query": []
+            },
+            "description": "Processes Google Play webhook notifications.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": {\n    \"data\": \"base64-payload\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Verify Apple Subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/payment/apple/verify-subscription",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "payment",
+                "apple",
+                "verify-subscription"
+              ],
+              "query": []
+            },
+            "description": "Verifies an Apple App Store subscription receipt or signed transaction.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"receiptData\": \"base64-receipt\",\n  \"productId\": \"premium_monthly\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Apple Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/payment/apple/webhook",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "payment",
+                "apple",
+                "webhook"
+              ],
+              "query": []
+            },
+            "description": "Processes Apple App Store server notifications.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"signedPayload\": \"signed-payload\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        }
+      ]
+    },
+    {
+      "name": "Subscriptions",
+      "description": "RevenueCat subscription plans, subscriptions, entitlements, admin plan management, and webhooks.",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{authToken}}",
+            "type": "string"
+          }
+        ]
+      },
+      "item": [
+        {
+          "name": "RevenueCat Webhook",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/webhook/revenuecat",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "webhook",
+                "revenuecat"
+              ],
+              "query": []
+            },
+            "description": "Processes RevenueCat webhook events. Configure webhook secret/signature according to deployment settings.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"event\": {\n    \"type\": \"INITIAL_PURCHASE\",\n    \"data\": {\n      \"event_id\": \"evt_123\",\n      \"subscriber\": {\n        \"app_user_id\": \"{{userId}}\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Webhook Health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/webhook/health",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "webhook",
+                "health"
+              ],
+              "query": []
+            },
+            "description": "Checks webhook endpoint health."
+          },
+          "event": []
+        },
+        {
+          "name": "Get Plans",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/plans",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "plans"
+              ],
+              "query": []
+            },
+            "description": "Lists active subscription plans."
+          },
+          "event": []
+        },
+        {
+          "name": "Get Plan Details",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/plans/{{planId}}",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "plans",
+                "{{planId}}"
+              ],
+              "query": []
+            },
+            "description": "Fetches a plan by planId."
+          },
+          "event": []
+        },
+        {
+          "name": "Create Subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/create",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "create"
+              ],
+              "query": []
+            },
+            "description": "Creates a subscription record for a plan.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planId\": \"{{planId}}\",\n  \"stripeToken\": \"tok_visa\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get Active Subscription",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/active",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "active"
+              ],
+              "query": []
+            },
+            "description": "Returns active subscription for the authenticated user."
+          },
+          "event": []
+        },
+        {
+          "name": "Get Subscription History",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/history",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "history"
+              ],
+              "query": []
+            },
+            "description": "Returns subscription history for the authenticated user."
+          },
+          "event": []
+        },
+        {
+          "name": "Cancel Subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/cancel",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "cancel"
+              ],
+              "query": []
+            },
+            "description": "Cancels the active subscription.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reason\": \"user_cancelled\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Pause Subscription",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/pause",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "pause"
+              ],
+              "query": []
+            },
+            "description": "Pauses the active subscription."
+          },
+          "event": []
+        },
+        {
+          "name": "Resume Subscription",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/resume",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "resume"
+              ],
+              "query": []
+            },
+            "description": "Resumes a paused subscription."
+          },
+          "event": []
+        },
+        {
+          "name": "Upgrade Or Downgrade Subscription",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/upgrade-downgrade",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "upgrade-downgrade"
+              ],
+              "query": []
+            },
+            "description": "Moves the active subscription to another plan.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newPlanId\": \"{{newPlanId}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Check Entitlements",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/check-entitlements",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "check-entitlements"
+              ],
+              "query": []
+            },
+            "description": "Returns entitlement access for the authenticated user."
+          },
+          "event": []
+        },
+        {
+          "name": "Subscription Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/stats",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "stats"
+              ],
+              "query": []
+            },
+            "description": "Admin subscription statistics."
+          },
+          "event": []
+        },
+        {
+          "name": "Create Subscription Plan",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/admin/plans/create",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "admin",
+                "plans",
+                "create"
+              ],
+              "query": []
+            },
+            "description": "Creates a subscription plan.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planName\": \"Premium\",\n  \"revenuecat_product_id\": \"premium_monthly\",\n  \"stripe_price_id\": \"price_123\",\n  \"entitlements\": [\n    \"advanced_recipes\",\n    \"meal_planning\"\n  ],\n  \"billing_period\": \"Monthly\",\n  \"amount\": 9.99,\n  \"currency\": \"BHD\",\n  \"description\": \"Premium monthly plan\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Update Subscription Plan",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/subscription/admin/plans/{{planId}}",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "subscription",
+                "admin",
+                "plans",
+                "{{planId}}"
+              ],
+              "query": []
+            },
+            "description": "Updates subscription plan details.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planName\": \"Premium Plus\",\n  \"entitlements\": [\n    \"advanced_recipes\",\n    \"meal_planning\",\n    \"grocery_integration\"\n  ],\n  \"billing_period\": \"Monthly\",\n  \"amount\": 12.99,\n  \"currency\": \"BHD\",\n  \"description\": \"Updated plan\",\n  \"isActive\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "description": "Admin dashboard summary endpoints.",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{adminToken}}",
+            "type": "string"
+          }
+        ]
+      },
+      "item": [
+        {
+          "name": "Total Overview",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/dashboard/total-overview",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "dashboard",
+                "total-overview"
+              ],
+              "query": []
+            },
+            "description": "Returns admin dashboard total overview."
+          },
+          "event": []
+        },
+        {
+          "name": "Revenue",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/dashboard/revenue?year=2026&month=",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "dashboard",
+                "revenue"
+              ],
+              "query": [
+                {
+                  "key": "year",
+                  "value": "2026"
+                },
+                {
+                  "key": "month",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Returns revenue data. Query filters depend on DashboardService implementation."
+          },
+          "event": []
+        }
+      ]
+    },
+    {
+      "name": "Manage Content",
+      "description": "Terms, privacy policy, about us, FAQ, and contact content management.",
+      "auth": {
+        "type": "bearer",
+        "bearer": [
+          {
+            "key": "token",
+            "value": "{{authToken}}",
+            "type": "string"
+          }
+        ]
+      },
+      "item": [
+        {
+          "name": "Add Terms Conditions",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/add-terms-conditions",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "add-terms-conditions"
+              ],
+              "query": []
+            },
+            "description": "Creates or updates terms and conditions.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Terms and conditions content.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get Terms Conditions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/get-terms-conditions",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "get-terms-conditions"
+              ],
+              "query": []
+            },
+            "description": "Returns terms and conditions."
+          },
+          "event": []
+        },
+        {
+          "name": "Delete Terms Conditions",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/delete-terms-conditions?id=%7B%7BcontentId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "delete-terms-conditions"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{contentId}}"
+                }
+              ]
+            },
+            "description": "Deletes terms and conditions by id."
+          },
+          "event": []
+        },
+        {
+          "name": "Add Privacy Policy",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/add-privacy-policy",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "add-privacy-policy"
+              ],
+              "query": []
+            },
+            "description": "Creates or updates privacy policy.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"Privacy policy content.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get Privacy Policy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/get-privacy-policy",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "get-privacy-policy"
+              ],
+              "query": []
+            },
+            "description": "Returns privacy policy document."
+          },
+          "event": []
+        },
+        {
+          "name": "Get Public Privacy Policy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/public-privacy-policy",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "public-privacy-policy"
+              ],
+              "query": []
+            },
+            "description": "Returns only the privacy policy description string."
+          },
+          "event": []
+        },
+        {
+          "name": "Delete Privacy Policy",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/delete-privacy-policy?id=%7B%7BcontentId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "delete-privacy-policy"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{contentId}}"
+                }
+              ]
+            },
+            "description": "Deletes privacy policy by id."
+          },
+          "event": []
+        },
+        {
+          "name": "Add About Us",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/add-about-us",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "add-about-us"
+              ],
+              "query": []
+            },
+            "description": "Creates or updates about us content.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"About Tidy Bity.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get About Us",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/get-about-us",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "get-about-us"
+              ],
+              "query": []
+            },
+            "description": "Returns about us content."
+          },
+          "event": []
+        },
+        {
+          "name": "Delete About Us",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/delete-about-us?id=%7B%7BcontentId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "delete-about-us"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{contentId}}"
+                }
+              ]
+            },
+            "description": "Deletes about us content by id."
+          },
+          "event": []
+        },
+        {
+          "name": "Add FAQ",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/add-faq",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "add-faq"
+              ],
+              "query": []
+            },
+            "description": "Creates a FAQ item.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"question\": \"How do I add a room?\",\n  \"description\": \"Open rooms and create a new room.\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get FAQ",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/get-faq",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "get-faq"
+              ],
+              "query": []
+            },
+            "description": "Lists FAQ items."
+          },
+          "event": []
+        },
+        {
+          "name": "Delete FAQ",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/delete-faq?id=%7B%7BcontentId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "delete-faq"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{contentId}}"
+                }
+              ]
+            },
+            "description": "Deletes a FAQ by id."
+          },
+          "event": []
+        },
+        {
+          "name": "Add Contact Us",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/add-contact-us",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "add-contact-us"
+              ],
+              "query": []
+            },
+            "description": "Creates or updates contact us content.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"support@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "event": []
+        },
+        {
+          "name": "Get Contact Us",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "noauth"
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/get-contact-us",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "get-contact-us"
+              ],
+              "query": []
+            },
+            "description": "Returns contact us content."
+          },
+          "event": []
+        },
+        {
+          "name": "Delete Contact Us",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{authToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}{{apiPrefix}}/manage/delete-contact-us?id=%7B%7BcontentId%7D%7D",
+              "host": [
+                "{{baseUrl}}{{apiPrefix}}"
+              ],
+              "path": [
+                "manage",
+                "delete-contact-us"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{contentId}}"
+                }
+              ]
+            },
+            "description": "Deletes contact us content by id."
+          },
+          "event": []
+        }
+      ]
+    }
+  ]
+}

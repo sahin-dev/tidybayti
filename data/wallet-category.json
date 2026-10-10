@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Travel",
+    "image": "https://res.cloudinary.com/dsmqrbppz/image/upload/v1740299118/Travel_kacb8h.png"
+  },
+  {
+    "name": "Investments",
+    "image": "https://res.cloudinary.com/dsmqrbppz/image/upload/v1740299118/Investment_u6yhxm.png"
+  },
+  {
+    "name": "Housing",
+    "image": "https://res.cloudinary.com/dsmqrbppz/image/upload/v1740299118/house_fqgtbk.png"
+  },
+  {
+    "name": "Life & Entertainment",
+    "image": "https://res.cloudinary.com/dsmqrbppz/image/upload/v1740299118/Entertainment_lbnfng.png"
+  },
+  {
+    "name": "Vehicle",
+    "image": "https://res.cloudinary.com/dsmqrbppz/image/upload/v1740299118/Vehicle_jbh5hc.png"
+  },
+  {
+    "name": "Financial Expense",
+    "image": "https://res.cloudinary.com/dsmqrbppz/image/upload/v1740299118/expenses_ixx4ai.png"
+  },
+  {
+    "name": "Communication",
+    "image": "https://res.cloudinary.com/dsmqrbppz/image/upload/v1740299118/Communication_c5ehzn.png"
+  },
+  {
+    "name": "Food and Drinks",
+    "image": "https://res.cloudinary.com/dsmqrbppz/image/upload/v1740299118/food_dnoods.png"
+  },
+  {
+    "name": "Shopping",
+    "image": "https://res.cloudinary.com/dsmqrbppz/image/upload/v1740299119/shopping_np9s7x.png"
+  },
+  {
+    "name": "Transportation",
+    "image": "https://res.cloudinary.com/dsmqrbppz/image/upload/v1740299119/transportation_sp0va8.png"
+  }
+]
